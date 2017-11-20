@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<style>
+    .help-inline{
+        padding-left: 0;
+    }
+    input[type="text"].Wdate {
+        background:#fff url(/lib/My97DatePicker/skin/datePicker.gif) no-repeat right !important;
+
+    }
+    .control-group .control .Wdate::-ms-clear{display:none;}
+
+    .control-group .control .WdateFmtErr{
+        font-weight:bold;
+        color:red;
+    }
+</style>
+<body class="page-header-fixed">
+<% include ../main/header.ejs %>
+<div class="page-container">
+    <% include ../main/sidebar.ejs %>
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">欢迎使用现金贷后台！</h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="/">我的桌面</a>
+                            <span class="icon-angle-right"></span>
+                        </li>
+                        <li>
+                            <a href="/manage/supervisor?t=<%=new Date().getTime()%>">管理员列表</a>
+                            <span class="icon-angle-right"></span>
+                        </li>
+                        <li>
+                            <a href="javascript:;">编辑管理员信息</a>
+                        </li>
+                        <li class="pull-right">
+                            <a href="javascript:location.replace(location.href);" class="btn yellow easy-pie-chart-reload" style="background-color: #eee; margin-right: 14px; padding: 0;"><i class="icon-repeat"></i><font><font>刷新</font></font></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="">
+                <div class="row-fluid">
+
+                    <div class="span12">
+
+                        <!-- BEGIN SAMPLE FORM PORTLET-->
+
+                        <div class="portlet box blue">
+
+                            <div class="portlet-title">
+                                <div class="caption"><i class="icon-reorder"></i><font><font>编辑管理员信息</font></font></div>
+                            </div>
+
+                            <div class="portlet-body">
+                                <form class="form-horizontal form" id="form">
+                                    <input type="hidden" name="id" value="<%= model ?model.id : '' %>"/>
+
+                                    <div class="control-group">
+                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>角色</font></font></label>
+                                        <div class="controls">
+                                            <select class="span6 m-wrap" name="roleId">
+                                                <option value="">--请选择--</option>
+                                                <% for(var i=0;i<roleList.length;i++){ %>
+                                                <option <%= (model && roleList[i].id == model.id) ? 'selected=selected' : '' %> value="<%=roleList[i].id %>"><%= roleList[i].name %></option>
+                                                <% }%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>登录名</font></font></label>
+                                        <div class="controls">
+                                            <input type="text" class="span6 m-wrap" id="name" placeholder="请输入登录名" datatype="/^[0-9A-Za-z]{5,12}$/" nullmsg="请输入登录名" errormsg="请输入登录名" name="name" value="<%= model ?model.name :'' %>" <%= model && model.name ? 'disabled="disabled"' : '' %>/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>密码</font></font></label>
+                                        <div class="controls">
+                                            <input type="password" class="span6 m-wrap" id="password" placeholder="请输入登录密码" datatype="/^\s*$/|s3-25" errormsg="请输入登录密码" name="payPwd"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>交易密码</font></font></label>
+                                        <div class="controls">
+                                            <input type="password" class="span6 m-wrap" id="password" placeholder="请输入登录密码" datatype="/^\s*$/|s3-25" errormsg="请输入登录密码" name="pwd"/>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="control-group">
+                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>姓名</font></font></label>
+                                        <div class="controls">
+                                            <input type="text" class="span6 m-wrap" id="Title" placeholder="请输入真实姓名" datatype="s1-4" nullmsg="请输入真实姓名" errormsg="请输入真实姓名" name="userName" value="<%= model?model.userName : '' %>"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>手机号码</font></font></label>
+                                        <div class="controls">
+                                            <input type="text" class="span6 m-wrap" id="mobile" placeholder="请输入手机号" datatype="m" nullmsg="请输入手机号" errormsg="请输入正确手机号" name="mobile" value="<%= model?model.mobile : '' %>"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>禁用</font></font></label>
+                                        <div class="controls">
+                                            <select class="span6 m-wrap" name="state">
+                                                <option value="0" <%= model && !model.state ? 'selected=selected' : '' %>>否</option>
+                                                <option value="1" <%= model &&  model.state ? 'selected=selected' : '' %>>是</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn blue" id="sub"><font><font>保存</font></font></button>
+                                        <button type="button" class="btn" onClick="window.history.go(-1)"  style=" margin-left: 10px;"><font><font>取消</font></font></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    $(".form").Validform({
+        btnSubmit: '#sub',
+        postonce: true,
+        tiptype: 4,
+        showAllError: true,
+        ajaxPost: true,
+        beforeSubmit: function (curform) {
+            $.ajax({
+                url: '/manage/saveSupervisor',
+                type: 'post',
+                data: {supervisor: JSON.stringify($('#form').serializeJson())},
+                success: function (msg) {
+                    if (!msg.error) {
+                        Huimodal_alert('保存成功', 1000, function () {
+                            location.reload();
+                        });
+                    }
+                    else {
+                        Huimodal_alert(msg.error, 1000, function () {
+                        });
+                    }
+                }
+            })
+            return false;
+        }
+    });
+</script>
+</html>

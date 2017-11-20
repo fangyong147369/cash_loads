@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+<% include ../main/top.ejs %>
+<style>
+    .help-inline{
+        padding-left: 0;
+    }
+    input[type="text"].Wdate {
+        background:#fff url(/lib/My97DatePicker/skin/datePicker.gif) no-repeat right !important;
+
+    }
+    .control-group .control .Wdate::-ms-clear{display:none;}
+    .control-group .control .WdateFmtErr{
+        font-weight:bold;
+        color:red;
+    }
+</style>
+<body class="page-header-fixed">
+<% include ../main/header.ejs %>
+<div class="page-container">
+    <% include ../main/sidebar.ejs %>
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">欢迎使用现金贷后台！</h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="/">我的桌面</a>
+                            <span class="icon-angle-right"></span>
+                        </li>
+                        <li>
+                            <a href="javascript:;">管理员列表</a>
+                        </li>
+                        <li class="pull-right">
+                            <a href="javascript:location.replace(location.href);" class="btn yellow easy-pie-chart-reload" style="background-color: #eee; margin-right: 14px; padding: 0;"><i class="icon-repeat"></i><font><font>刷新</font></font></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+
+                    <div class="span12">
+                        <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <div class="caption"><i class="icon-globe"></i>管理员列表</div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="clearfix">
+                                    <div class="control-group new_select">
+                                        <div class="controls">
+                                            <button name="" id="" class="m-wrap btn green" type="button" onclick="" style=" padding: 0;"><a href="/manage/editSupervisor" style=" color: #fff; display: block; padding: 7px 14px;">新增<i class="m-icon-swapright m-icon-white"></i></a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th>
+                                        <th>ID</th>
+                                        <th>用户名</th>
+                                        <th>角色</th>
+                                        <th>手机号</th>
+                                        <th>真实姓名</th>
+                                        <th>状态</th>
+                                        <th>上次登录时间</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <script type="text/template" id="supervisors_tmpl">
+                                        <tr class="gradeX odd">
+                                            <td><input type="checkbox" class="checkboxes" value="1" /></td>
+                                            <td>{id}</td>
+                                            <td>{name}</td>
+                                            <td>{role}</td>
+                                            <td>{mobile}</td>
+                                            <td>{userName}</td>
+                                            <td>{lock}</td>
+                                            <td>{lastLogin}</td>
+                                            <td>{addTime}</td>
+                                            <td>{handle}</td>
+                                        </tr>
+                                    </script>
+                                    <tbody id="supervisors_list">
+                                    </tbody>
+                                </table>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="dataTables_paginate paging_bootstrap pagination clearfix" id="pagination">
+                                            <ul id="page" style="float: right;"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<% include ../main/bottom.ejs %>
+<script type="text/javascript">
+    load();
+    function load() {
+        ZC_api.loadSupervisorsList(1, 20);
+    }
+    TableManaged();
+</script>
+</html>
