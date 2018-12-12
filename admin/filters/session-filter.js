@@ -10,6 +10,6 @@ exports.auth= function*(next) {
     if(this.session.user){
         yield* next;
     }else{
-        this.redirect('/signIn');
+        this.redirect('/signInPC');
     }
 };

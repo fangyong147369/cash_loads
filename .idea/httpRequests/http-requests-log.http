@@ -1,0 +1,114 @@
+GET http://localhost:8083/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0.war/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8082/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/litemall-admin-api-0.1.0/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:8083/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-06T125648.200.json
+
+###
+
+GET http://localhost:8083/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-06T125640.200.json
+
+###
+
+POST http://localhost:8083/admin/goods/list?page=0&limit=10000
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-06T125553.200.json
+
+###
+
+GET http://localhost:8083/admin/goods/list
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-06T122706.200.json
+
+###
+
+GET http://localhost:8083/admin/collect/list
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-06T122651.200.json
+
+###
+
+GET http://localhost:8083/admin/collect/list
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-12-06T122444.200.json
+
+###
+

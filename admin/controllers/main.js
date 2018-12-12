@@ -1,7 +1,5 @@
 'use strict';
 const biz_suppervisors=require('../../base/suppervisors.js');
-const biz_stat=require('../../base/stat.js');
-
 /**
  * 登录
  */
@@ -28,21 +26,15 @@ exports.index=function*(){
  * 登录
  */
 exports.findSuppervisor=function*(){
-    let name=this.request.body.name;
+    let userName=this.request.body.username;
     let password=this.request.body.password;
-    let body=yield biz_suppervisors.findSuppervisor(name,password);
+    let body=yield biz_suppervisors.findSuppervisor(userName,password);
+    console.log("body:"+JSON.stringify(body))
+
     if(body.error || !body.model){
         this.body={error:body.error};
     }else{
         this.session.user=body.model;
         this.redirect('/index',{req:this});
     }
-}
-
-/**
- * 统计每天借贷
- */
-exports.getTotalLoan=function*(){
-    let data=yield biz_stat.getTotalLoan();
-    this.body=data;
 }

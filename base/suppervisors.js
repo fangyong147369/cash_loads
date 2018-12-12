@@ -17,8 +17,7 @@ exports.findSuppervisor=function *(name,password){
     }
     return co(function *() {
         try {
-            let result=yield midx('/m/operator/signIn',{name:name,pwd:password});
-            console.log(result);
+            let result=yield midx('/manage/operator/signIn',{userName:name,password:password});
             if(result && result.data && result.data.id){
                 return {error:null,model:result.data};
             }else{

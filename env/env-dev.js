@@ -6,7 +6,7 @@
     com.env = {
         redis:{
             port:6379,
-            host:"127.0.0.1"
+            host:"localhost"
         },
         mysql:{
             host:"",
@@ -20,7 +20,7 @@
             appID: '',
             AppSecret: ''
         },
-        core_path: "http://localhost:8080",
+        core_path: "http://localhost:8080/sys_api-1.0.0.0",
         cookiehost:'',
         cdn_url: "",
         guid:function(){

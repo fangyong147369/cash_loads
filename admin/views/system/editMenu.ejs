@@ -1,143 +1,157 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <% include ../main/top.ejs %>
-<style>
-    .help-inline{
-        padding-left: 0;
-    }
-    input[type="text"].Wdate {
-        background:#fff url(/lib/My97DatePicker/skin/datePicker.gif) no-repeat right !important;
-
-    }
-    .control-group .control .Wdate::-ms-clear{display:none;}
-
-    .control-group .control .WdateFmtErr{
-        font-weight:bold;
-        color:red;
-    }
-</style>
-<body class="page-header-fixed">
-<% include ../main/header.ejs %>
-<div class="page-container">
-    <% include ../main/sidebar.ejs %>
-    <div class="page-content">
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span12">
-                    <h3 class="page-title">欢迎使用现金贷后台！</h3>
-                    <ul class="breadcrumb">
-                        <li>
-                            <i class="icon-home"></i>
-                            <a href="/">我的桌面</a>
-                            <span class="icon-angle-right"></span>
-                        </li>
-                        <li>
-                            <a href="/system/menu?t=<%=new Date().getTime()%>">菜单列表</a>
-                            <span class="icon-angle-right"></span>
-                        </li>
-                        <li>
-                            <a href="javascript:;">保存菜单配置</a>
-                        </li>
-                        <li class="pull-right">
-                            <a href="javascript:location.replace(location.href);" class="btn yellow easy-pie-chart-reload" style="background-color: #eee; margin-right: 14px; padding: 0;"><i class="icon-repeat"></i><font><font>刷新</font></font></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <div class="portlet box blue">
-                            <div class="portlet-title">
-                                <div class="caption"><i class="icon-reorder"></i><font><font>菜单设置</font></font></div>
-                            </div>
-                            <div class="portlet-body">
-                                <form class="form-horizontal form" id="form">
-                                    <input type="hidden" name="id" value="<%=menu?menu.id:''%>"/>
-
-                                    <div class="control-group">
-                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>父菜单</font></font></label>
-                                        <div class="controls">
-                                            <select class="span6 m-wrap" name="parentId">
-                                                <option value="0">--请选择--</option>
-                                                <% for(var i=0;i<parentMenu.length;i++){ %>
-                                                <option <%= (menu && parentMenu[i].id == menu.parentId) ? 'selected=selected' : '' %> value="<%=parentMenu[i].id %>"><%= parentMenu[i].name %></option>
-                                                <% }%>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>菜单名称</font></font></label>
-                                        <div class="controls">
-                                            <input type="text" class="span6 m-wrap" id="name" placeholder="请输入菜单名称" datatype="s2-50" nullmsg="请输入菜单名称" errormsg="大于2位小于50位" name="name" value="<%=menu?menu.name:''%>">
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label"><span class="required"><font><font></font></font></span><font><font>菜单链接</font></font></label>
-                                        <div class="controls">
-                                            <input type="text" class="span6 m-wrap" id="name" placeholder="请输入菜单链接"  nullmsg="请输入菜单链接"  name="href" value="<%=menu?menu.href:''%>">
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>排序</font></font></label>
-                                        <div class="controls">
-                                            <input type="text" class="span6 m-wrap" id="name" placeholder="请输入排序"  datatype="n1-10"  nullmsg="请输入排序" errormsg="请输入数字" name="sort" value="<%=menu?menu.sort:''%>">
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label"><span class="required"><font><font>*</font></font></span><font><font>启用</font></font></label>
-                                        <div class="controls">
-                                            <select class="span6 m-wrap" name="state">
-                                                <option value="0" <%= menu && menu.state == 0 ? 'selected=selected' : '' %>>否</option>
-                                                <option value="1" <%= menu && menu.state == 1 ? 'selected=selected' : '' %>>是</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-actions">
-                                        <input type="button" class="btn blue" id="sub" value="保存"/>
-                                        <button type="button" class="btn" onClick="window.history.go(-1)"  style=" margin-left: 10px;"><font><font>取消</font></font></button>
-                                    </div>
-                                </form>
+<link href="/static/js/plugins/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css"/>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input type="hidden" name="id" value="<%=model&&model.id ||0 %>"/>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">菜单名称：</label>
+                            <div class="col-sm-8">
+                                <input id="title" name="name" value="<%=model&&model.name || '' %>" class="form-control"
+                                       type="text">
                             </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">父菜单：</label>
+                            <div class="col-sm-8">
+                                <select data-placeholder="父菜单Id" name="parentId" id="parentId" class="form-control chosen-select"
+                                        tabindex="2">
+                                    <% if(parentmodel.length >0){ %>
+                                        <option value="0">--默认顶级菜单--</option>
+                                        <% for(var i=0;i<parentmodel.length;i++){ %>
+                                        <option <%=(model&&model.parentId)===parentmodel[i].id ? 'selected=selected' : '' %>
+                                                value="<%=parentmodel[i].id%>"><%=parentmodel[i].name%></option>
+                                        <% } %>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">链接：</label>
+                            <div class="col-sm-8">
+                                <input id="href" name="href" value="<%= model&&model.href || '' %>" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">排序：</label>
+                            <div class="col-sm-8">
+                                <input id="sort" name="sort" value="<%= model&&model.sort ||0%>" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态:</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline">
+                                    <input type="radio" name="status"
+                                           value="1" checked <%= model&&model.status == 1 ? 'checked=checked' : '' %> /> 启用
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="status"
+                                           value="-1" <%= model&&model.status == -1 ? 'checked=checked' : '' %>/> 禁用
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">备注：</label>
+                            <div class="col-sm-8">
+                                <input id="remark" name="remark" value="<%= model&&model.remark || '' %>" class="form-control"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-3" style="margin-left: 45%">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
 <% include ../main/bottom.ejs %>
-<script type="text/javascript">
-    $("form.form").Validform({
-        btnSubmit: '#sub',
-        postonce: true,
-        tiptype: 4,
-        showAllError: true,
-        ajaxPost: true,
-        beforeSubmit: function (curform) {
-            $.ajax({
-                url: '/system/saveMenu',
-                type: 'post',
-                data: {menu: JSON.stringify($('#form').serializeJson())},
-                success: function (msg) {
-                    if (!msg.error) {
-                        Huimodal_alert('保存成功', 1000, function () {
-                            location.href='/system/menu';
-                        });
-                    }
-                    else {
-                        Huimodal_alert(msg.error, 1000, function () {
-                        });
-                    }
+<script type="text/javascript" src="/static/js/plugins/webuploader/0.1.5/webuploader.js"></script>
+<script src="/static/js/upload.js?v=<%= new Date().getTime() %>"></script>
+<script>
+
+    $(function () {
+        $('.summernote').summernote({
+            height: '220px',
+            lang: 'zh-CN',
+            callbacks: {
+                onImageUpload: function (files, editor, $editable) {
+                    sendFile(files);
                 }
-            })
-            return false;
+            }
+        });
+        var content = $("#content").val();
+
+        $('#content_sn').summernote('code', content);
+        validateRule();
+        $('#imgDiv').createUpload();
+    });
+
+    $.validator.setDefaults({
+        submitHandler: function () {
+            submit01();
         }
     });
+
+    function submit01() {
+        var content = $("#content_sn").summernote('code');
+        $("#content").val(content);
+        $.ajax({
+            type: "POST",
+            url: "/system/saveMenu",
+            data: {model:$('#signupForm').serializeJson()},
+            async: false,
+            error: function (err) {
+                layer.alert("Connection error"+err);
+            },
+            success: function (data) {
+                if (data.code == 1) {
+                    parent.layer.msg("保存成功");
+                    parent.reLoad();
+                    var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                    parent.layer.close(index);
+                } else {
+                    layer.alert(data.message)
+                }
+            }
+        });
+    }
+
+    function validateRule() {
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        $("#signupForm").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                href: {
+                    required: true
+                }
+            },
+            messages: {
+                name: {
+                    required: icon + "请输入菜单名称"
+                },
+                href: {
+                    required: icon + "请输入菜单href"
+                }
+            }
+        })
+    }
 </script>
+</body>
 </html>

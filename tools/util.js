@@ -84,4 +84,5 @@
         else
             return this + '&'+key+'='+value;
     }
+
 })();
